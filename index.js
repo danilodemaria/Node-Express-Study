@@ -16,13 +16,12 @@ app.use(express.static('public'));
 app.use(helmet());
 app.use('/api/courses', courses);
 app.use('/', home);
+app.use(logger);
 
 if (app.get('env') === 'development') {
   app.use(morgan('tiny'));
   startupDebugger('Morgan enabled...');
 }
-app.use(logger);
-app.use(autehntication);
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => startupDebugger(`Listening on port ${port}`));
